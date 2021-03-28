@@ -15,5 +15,7 @@ public class StudentDAO {
 	public StudentDAO() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public void readRecord() {
+		
+	}
 }
