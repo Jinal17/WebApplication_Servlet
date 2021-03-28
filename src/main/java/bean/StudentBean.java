@@ -32,11 +32,5 @@ public class StudentBean {
 	private String interested;
 	private String comments;
 	private String recommend;
-	
-	
-	
-	public static void main(String[] args ) {
-		
-	}
 
 }
