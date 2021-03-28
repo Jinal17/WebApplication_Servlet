@@ -16,6 +16,7 @@ public class StudentBean {
 		// TODO Auto-generated constructor stub
 	}
 	
+	//Instance variables related to the index.html values
 	private String studentId;
 	private String username;
 	private String streetAddress;
