@@ -1,10 +1,10 @@
 /**
- * 
+ * This class is for the student Java Bean
  */
 package main.java.bean;
 
 /**
- * @author jinalshah
+ * @author Justin Carlitti
  *
  */
 public class StudentBean {
