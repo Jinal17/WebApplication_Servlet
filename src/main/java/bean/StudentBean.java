@@ -15,7 +15,6 @@ public class StudentBean {
 	public StudentBean() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	//Instance variables related to the survey form attributes
 	private String studentId;
 	private String username;
@@ -212,5 +211,4 @@ public class StudentBean {
 		this.recommend = recommend;
 		
 	}
-
 }
