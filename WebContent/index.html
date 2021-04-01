@@ -17,13 +17,13 @@
 <!--The hidden error log for JQuery modal -->
 <div id="modal" style="display:none"></div>
 
+	
     <div class="w3-container">
       <h2 style="text-align: center; border: 5px solid #006633; box-shadow: 10px 15px 10px #FFCC33;">Prospective Student Survey</h2>
       <!--Beginning of Modal -->
       <div class="w3-card-4 w3-center" style="width:75%; margin:auto;">
-	      <br> <p>
-				<h2 id="greeting"></h2>
-			</p>
+	      <br/> 
+	      <p><h2 id="greeting"></h2></p>
 	      <!--Modal Header -->
 	<header class="w3-container" style="background-color: #006633;">
           <h1 style="color: #FFCC33;">Personal Information</h1>
@@ -31,7 +31,7 @@
         <!--Modal Body -->
         <div class="w3-container" style="background-color: white">
 	  <p>Please fill out the information </p>
-	  <form method="post" id="formId" autocomplete="on" onreset="reset();">
+	  <form method="post" id="formId" autocomplete="on" action="MyServlet" onreset="reset();">
 	    <table class="w3-table w3-bordered">
 	      <!--Personal Information table -->
 	      <thead>
@@ -97,7 +97,7 @@
                     <label>Telephone # *</label>
                   </td>
                   <td>
-                    <input id="s_telephone" name="telephone" type="tel" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                    <input id="s_telephone" name="telephone" type="tel" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
 		    <small>Format: 123-456-7890</small>
                   </td>
                 </tr>
@@ -106,7 +106,7 @@
                     <label>Email *</label>
                   </td>
                   <td>
-                    <input id="s_email" name="email" type="email" required placeholder="abc@email.com">
+                    <input id="s_email" name="email" type="email" placeholder="abc@email.com">
                   </td>
                 </tr>
 		<tr>
@@ -131,7 +131,7 @@
                     <label>Date of HS Graduation *</label>
                   </td>
                   <td>
-                    <input id="s_grad" name="graduation" type="text" placeholder="month" list="months" required/>
+                    <input id="s_grad" name="graduation" type="text" placeholder="month" list="months"/>
 		    <datalist id="months">
 	 	      <option value="January">
 		      <option value="February">
@@ -146,7 +146,7 @@
 		      <option value="November">
 		      <option value="December">
 		    </datalist>
-		    <input type="number" id="s_gdate" name="gdate" min="1900" max="2200" placeholder="year" required>
+		    <input type="number" id="s_gdate" name="gdate" min="1900" max="2200" placeholder="year">
                   </td>
                 </tr>
 	      </tbody>
@@ -217,7 +217,7 @@
 	      <tbody>
 	        <tr>
 	 	  <td><label>Data</label></td>
-		  <td><input id="numbers" type="text" onblur="calculate(this.value);" placeholder="1,2,3,4,5,6,7,8,9,10">
+		  <td><input id="numbers" name= "numbers" type="text" onblur="calculate(this.value);" placeholder="1,2,3,4,5,6,7,8,9,10">
 		  <br>
 		  <label id="number-error"></label>
 		  </td> 
