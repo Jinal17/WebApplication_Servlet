@@ -22,15 +22,55 @@ public class StudentBean {
 	private String city;
 	private String state;
 	private String zipCode;
-	private String telephoneNum;
+	private String phoneNo;
 	private String email;
 	private String url;
+	// date
 	private String hsGradMonth;
 	private String hsGradYear;
 	private String likedMost;
 	private String interested;
 	private String comments;
 	private String recommend;
+	
+	//Constructor 
+	
+	public StudentBean( String studentId,  
+			String username, 
+			String streetAddress, 
+			String city, 
+			String state, 
+			String zipCode, 
+			String phoneNo, 
+			String email, 
+			String url, 
+			// date TODO
+			String hsGradMonth, 
+			String hsGradYear,
+			String likedMost, 
+			String interested, 
+			String comments, 
+			String recommend) {
+
+		 this.studentId = studentId;
+		 this.username = username;
+		 this.streetAddress = streetAddress;
+		 this.city = city; 
+		 this.state = state; 
+		 this.zipCode = zipCode; 
+		 this.phoneNo = phoneNo;
+		 this.email = email;
+		 this.url = url;
+		 this.hsGradMonth = hsGradMonth; 
+		 this.hsGradYear = hsGradYear;
+		 this.likedMost = likedMost;
+		 this.interested = interested; 
+		 this.comments = comments;
+		 this.recommend = recommend;
+}
+	
+	
+//Getter Setter
 	
 	public String getStudentId() {
 		
@@ -104,15 +144,15 @@ public class StudentBean {
 		
 	}
 	
-	public String getTelephoneNum() {
+	public String getPhoneNo() {
 		
-		return this.telephoneNum;
+		return this.phoneNo;
 		
 	}
 	
-	public void setTelephoneNum(String telephoneNum) {
+	public void setPhoneNo(String phoneNo) {
 		
-		this.telephoneNum = telephoneNum;
+		this.phoneNo = phoneNo;
 		
 	}
 	

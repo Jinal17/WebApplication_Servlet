@@ -7,23 +7,31 @@ package main.java.bean;
  */
 
 public class DataProcessor {
+	
+	String nums;
+	public DataProcessor(String nums){
+		this.nums = nums;
+	}
 
+	public DataBean calculate() {
+		double mean = mean();
+		double sd =  stdDev(mean);
+		DataBean dataBean = new DataBean(mean, sd);
+		return dataBean;
+	}
 	/*
 	 * Responsible for calculating the mean
-	 * @returns: a float
+	 * @returns: a double
 	 * @param: nums that is represented as String from the Data Field on the Survey form
 	 */
-	public float mean(String nums) {
+	public double mean() {
 		
-		float mean = 0;
-		
-		String[] values = nums.split(",");
-		
+		String[] values = this.nums.split(",");
+		double sum = 0;
 		for(String value : values) {
-			mean += Integer.parseInt(value);
+			sum += Integer.parseInt(value);
 		}
-		
-		return mean/values.length;
+		return sum/values.length; // get mean
 		
 	}
 	
@@ -34,12 +42,12 @@ public class DataProcessor {
 	 * @param: a double mean that can be obtained from calling the other method in this class on the 
 	 * same number set 
 	 */
-	public double stdDev(String nums, double mean) {
+	public double stdDev(double mean) {
 		
 		double stdDev = 0.0;
 		double sum = 0.0;
 		
-		String[] values = nums.split(",");
+		String[] values = this.nums.split(",");
 		
 		for(String value : values) {
 			

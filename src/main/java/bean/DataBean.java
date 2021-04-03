@@ -9,16 +9,21 @@ package main.java.bean;
 public class DataBean {
 	
 	//The DataBean has two attributes to hold the mean and standard deviation.
-	private float mean;
+	private double mean;
 	private double stdDev;
 	
-	public float getMean() {
+	public DataBean(double mean, double stdDev) {
+		this.mean = mean;
+		this.stdDev = stdDev;
+	}
+	
+	public double getMean() {
 		
 		return this.mean;
 		
 	}
 	
-	public void setMean(float mean) {
+	public void setMean(double mean) {
 		
 		this.mean = mean;
 		
