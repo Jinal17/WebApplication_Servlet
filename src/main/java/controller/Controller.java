@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,11 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.java.bean.DataBean;
 import main.java.bean.DataProcessor;
 import main.java.bean.StudentBean;
 import main.java.dao.StudentDAO;
+
 
 /**
  * Servlet implementation class Controller
@@ -39,7 +43,22 @@ public class Controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.print("enter get method");
+		String[] studentID = request.getParameterValues("param");
+        StudentDAO studentDAO = new StudentDAO();
+        StudentBean studentBean = studentDAO.retrieveRecord(studentID[0]);
+        HttpSession session = request.getSession();
+//        session.setAttribute("studentRecord", studentBean);
+        request.setAttribute("studentRecord", studentBean);
+        String address;
+        if (studentBean != null) { //If student details found
+                address = "/WEB-INF/Student.jsp"; // TODO
+        } else {
+                address = "/WEB-INF/NoSuchStudent.jsp"; // TODO
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        dispatcher.forward(request, response);
 	}
 
 	/**
@@ -109,8 +128,10 @@ public class Controller extends HttpServlet {
 		StudentDAO obj = new StudentDAO();
 		DataProcessor processor = new DataProcessor(numbers);
 		DataBean dataBean = processor.calculate();
+		List<String> studentIds = new ArrayList<>();
 		try {
 			obj.registerStudent(student);
+			studentIds = obj.retrieve();
 		} catch (Exception e) {
 			System.out.println("data base error " + e.getMessage());
 		}
@@ -147,13 +168,19 @@ public class Controller extends HttpServlet {
 //		out.println("</body></html>");
 		
 		request.setAttribute("dataBean", dataBean);
-		
+		request.setAttribute("studentIds", studentIds);
 		
 		if(dataBean.getMean() < 90 ) {
 			RequestDispatcher dispatcher =
 			request.getRequestDispatcher("/WEB-INF/SimpleAcknowledgement.jsp");
 			dispatcher.forward(request, response);
+		}else if (dataBean.getMean() >= 90) {
+			RequestDispatcher dispatcher =
+			request.getRequestDispatcher("/WEB-INF/WinnerAcknowledgement.jsp");
+			dispatcher.forward(request, response);
 		}
+		
+		
 		
 	}
 
