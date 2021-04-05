@@ -1,0 +1,260 @@
+<!--This is the HTML Document for the survery page of hw2 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Links for the proper JQuery library and w3 schools -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+     <link rel="stylesheet" type="text/css" href="css/edited.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <title>Student Survey</title>
+  </head>
+  <body>
+
+
+<!--The hidden error log for JQuery modal -->
+<div id="modal" style="display:none"></div>
+
+	
+    <div class="w3-container">
+      <h2 style="text-align: center; border: 5px solid #006633; box-shadow: 10px 15px 10px #FFCC33;">Prospective Student Survey</h2>
+      <!--Beginning of Modal -->
+      <div class="w3-card-4 w3-center" style="width:75%; margin:auto;">
+	      <br/> 
+	      <p><h2 id="greeting"></h2></p>
+	      <!--Modal Header -->
+	<header class="w3-container" style="background-color: #006633;">
+          <h1 style="color: #FFCC33;">Personal Information</h1>
+        </header>
+        <!--Modal Body -->
+        <div class="w3-container" style="background-color: white">
+	  <p>Please fill out the information </p>
+	  <form method="post" id="formId" autocomplete="on" action="Controller" onreset="reset();">
+	    <table class="w3-table w3-bordered">
+	      <!--Personal Information table -->
+	      <thead>
+                <tr>
+                  <th class="s_t_head">Personal Information</th>
+                </tr>
+              </thead>
+	      <tbody>
+	      <tr>
+                  <td>
+                    <label>Student ID *</label>
+                  </td>
+                  <td>
+                    <input id="s_studID" name="studID" type="text" required>
+                  </td>
+                </tr>
+		<tr>
+	        <tr>
+		  <td>
+		    <label>Username *</label>
+		  </td>
+		  <td> 
+		    <input id="s_username" name="name" type="text" required autofocus>
+		  </td>
+	 	</tr>
+		<tr>
+                  <td>
+                    <label>Street Address *</label>
+                  </td>
+                  <td>
+                    <input id="s_address" name="address" type="text">
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>City</label>
+                  </td>
+                  <td>
+                    <input id="s_city" name="city" type="text">
+		  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>State</label>
+                  </td>
+                  <td>
+		    <input id="s_state" name="state" type="text">	
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>Zip code</label>
+                  </td>
+                  <td>
+                    <input id="s_zip" name="zip" type="number" pattern="(\d{5}([\-]\d{4})?)" onblur="validateZip(this.value)">
+		    <small>Format: #####</small>
+		    <br>
+		    <label id="zipError"></label>
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>Telephone # *</label>
+                  </td>
+                  <td>
+                    <input id="s_telephone" name="telephone" type="tel" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+		    <small>Format: 123-456-7890</small>
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>Email *</label>
+                  </td>
+                  <td>
+                    <input id="s_email" name="email" type="email" placeholder="abc@email.com">
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>URL</label>
+                  </td>
+                  <td>
+                    <input id="s_url" name="url" type="url" placeholder="https://www2.gmu.edu">
+		    <small>Format: https://www2.gmu.edu</small>
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>Date of Survey</label>
+                  </td>
+                  <td>
+                    <input id="s_date" name="date" type="date">
+                  </td>
+                </tr>
+		<tr>
+                  <td>
+                    <label>Date of HS Graduation *</label>
+                  </td>
+                  <td>
+                    <input id="s_grad" name="graduation" type="text" placeholder="month" list="months"/>
+		    <datalist id="months">
+	 	      <option value="January">
+		      <option value="February">
+		      <option value="March">
+		      <option value="April">
+		      <option value="May">
+		      <option value="June">
+		      <option value="July">
+		      <option value="August">
+		      <option value="September">
+		      <option value="October">
+		      <option value="November">
+		      <option value="December">
+		    </datalist>
+		    <input type="number" id="s_gdate" name="gdate" min="1900" max="2200" placeholder="year">
+                  </td>
+                </tr>
+	      </tbody>
+	    </table>
+            <!--Feeback Table -->
+	    <table class="w3-table w3-bordered">
+	      <thead>
+              <tr>
+	        <th class="s_t_head2">Feedback</th>
+              </tr>
+            </thead>
+	      <tbody>
+		      <!--Checkbox-->
+	        <tr>
+		  <td style="width: 355px;">
+		    <label>Liked most about campus? *</label>
+		  </td>
+		  <!--Update since hw1, made the checkboxes have a clickable label -->
+		  <td>
+			  <div><input name="thingsLiked" type="checkbox" value="students" id="studentsId"><label for="studentsId">Students</label></div>
+			  <div><input name="thingsLiked" type="checkbox" value="Location" id="locationId"><label for="locationId">Location</label></div>
+			  <div><input name="thingsLiked" type="checkbox" value="Campus" id="campusId"><label for="campusId">Campus</label></div>
+			  <div><input name="thingsLiked" type="checkbox" value="Atmosphere" id="atmosphereId"><label for="atmosphereId">Atmosphere</label></div>
+			  <div><input name="thingsLiked" type="checkbox" value="DormRooms" id="dormRoomId"><label for="dormRoomId">Dorm rooms</label></div>
+			  <div><input name="thingsLiked" type="checkbox" value="Sports" id="sportId"><label for="sportId">Sports</label></div>
+		  </td>
+		</tr>
+		<!--RadioBox -->
+		<tr>
+		  <td style="width: 355px;">
+		    <label>How did you become interested in GMU? *</label>
+		  </td>
+		  <td>
+			  <div><input name="interested" type="radio" value="friends" required id="friendsId"><label for="friendsId">Friends</label>
+				  <input name="interested" type="radio" value="television" required id="televisionId"><label for="televisionId">Television</label>
+				  <input name="interested" type="radio" value="internet" required id="internetId"><label for="internetId">Internet</label>
+				  <input name="interested" type="radio" value="other" required id="otherId"><label for="otherId">Other</label> </div>
+		  </td>
+		</tr>
+		<tr>
+		  <td style="width: 355px;">
+		    <label>Additional Comments</label>
+		  </td>
+		  <td>
+		    <textarea name="comments" row="4" placeholder="Enter Comments Here"></textarea>
+		  </td>
+		</tr>
+		<tr>
+		  <td>
+		    <label>Would you recommend GMU to a friend? *</label>
+		  </td>
+		  <td>
+		    <select name="recommend" required>
+		      <option>Very Likely</option>
+		      <option>Likely</option>
+		      <option>Unlikely</option>
+		    </select>
+		  </td>
+		</tr>
+	      </tbody>
+	    </table>
+	    <table class="w3-table w3-bordered">
+              <thead>
+                <tr>
+                  <th class="s_t_head2">Calculation</th>
+                </tr>
+              </thead>
+	      <tbody>
+	        <tr>
+	 	  <td><label>Data</label></td>
+		  <td><input id="numbers" name= "numbers" type="text" onblur="calculate(this.value);" placeholder="1,2,3,4,5,6,7,8,9,10">
+		  <br>
+		  <label id="number-error"></label>
+		  </td> 
+	        </tr>
+		<tr>
+		  <td><label>Average</label></td>
+		  <td><label id="avg"></label></td>
+		</tr>
+		<tr>
+		  <td><label>Maximum</label></td>
+		  <td><label id="max"></label></td>
+		</tr>
+	      </tbody>
+            </table>
+	    <!--Form Buttons-->
+	    <div class="w3-container">
+	      <input type="submit" onclick="return validate(event)" id="submitButton" class="w3-button w3-black w3-round-xxlarge" value="Submit"> 
+	      <input type="button" onclick="formReset()" class="w3-button w3-black w3-round-xxlarge" value="Reset"/>
+	   </div>
+	  </form>
+        </div>
+        <!--What is the *? -->
+        <footer class="w3-container" style="background-color: #006633;">
+          <p style="color: white">* is marked for required questions</p>
+	</footer>
+      </div>
+    </div>
+  </body>
+  </br>
+  <!--GMU footer logo -->
+  <footer>
+    <a class="logo" href="https://www2.gmu.edu">
+      <img src="images/GMU_CS_Logo.png" alt="GMU CS Logo" align="right" width="50%">
+    </a>
+  </footer>
+
+  <script src="js/scripts.js"></script>
+  <script type="text/javascript"> greet();</script>
+</html>
