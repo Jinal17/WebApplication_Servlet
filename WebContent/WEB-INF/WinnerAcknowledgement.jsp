@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Winner!!</title>
-
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+ <link rel="stylesheet" type="text/css" href="css/edited.css">
 <script type="text/javascript">
             function callServlet() {
                 document.forms[0].action = "Controller";
@@ -15,12 +16,18 @@
         </script>
 </head>
 <body>
-<p> Yay!! You are the Lucky Winner  </p>
-
+	<div class="w3-top w3-margin-bottom">
+  <div class="w3-container w3-gmu w3-center w3-margin-bottom">
+    <a class="w3-bar-item w3-gmu w3-hover-gmu w3-disbutton" >Congratulations!</a>
+  </div>
+</div>
+</br></br>
+<div class="w3-container w3-margin-top w3-center">
+<p> Yay!! You are the Lucky Winner of the raffle. </p>
+You have won two movie tickets. </br></br>
 Your Score is : 
-<p> Mean : ${dataBean.mean} </p>
+<p > Mean : ${dataBean.mean} </p>
 <p> Standard Deviation : ${dataBean.stdDev} </p>
-
 
 <form id="WinnerAck" method="get" action="Controller">
 		<table class="cs-container cs-table">
@@ -38,7 +45,10 @@ Your Score is :
 			<%}%>
 		</table>
 </form>
+</div>
+</br></br></br></br></br>
+<h1 style="text-align:center"> Thank you for filling out the form!</h1>
 
 
 </body>
-</html>s
+</html>
