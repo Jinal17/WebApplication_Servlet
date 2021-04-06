@@ -17,3 +17,5 @@ Software and jar files Required:
 2) Apache Tomcat 8 or 10
 3) Cisco AnyConnect VPN 
 4) Atleast ojdbc8.jar
+
+Installation and Execution Instructions.
