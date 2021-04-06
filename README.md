@@ -18,5 +18,5 @@ Software and jar files Required:
 3) Cisco AnyConnect VPN 
 4) Atleast ojdbc8.jar
 
-Installation and Execution Instructions.
+Installation and Execution Instructions:
 1)
