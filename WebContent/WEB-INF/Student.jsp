@@ -6,13 +6,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css" />
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css" /> --%>
 <title>Student Survey Details</title>
+ <link rel="stylesheet" type="text/css" href="css/edited.css">
 </head>
-<body>
+<body class="back">
 	<!-- Display students survey records -->
-	<table class="cs-container cs-table cs-content">
-		<caption class="cs-container cap-heading">Student Survey Records</caption>
+	<div class="w3-top w3-margin-bottom">
+  <div class="w3-container w3-gmu w3-center w3-margin-bottom">
+    <a class="w3-bar-item w3-gmu w3-hover-gmu w3-disbutton" >Student Survey Records</a>
+  </div>
+</div>
+</br></br>
+<div class="w3-container w3-margin-top">
+	<table>
+		
 		<%	StudentBean std = new StudentBean();
 			std = (StudentBean) request.getAttribute("studentRecord");
 		%>
@@ -69,6 +77,6 @@
 			<td><%=std.getRecos() %></td>
 		</tr> --%>
 	</table>
-	
+	</div>
 </body>
 </html>
