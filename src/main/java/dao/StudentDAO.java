@@ -18,19 +18,11 @@ import main.java.bean.StudentBean;
  * @author jinalshah
  *
  */
-public class StudentDAO {
+public class StudentDAO extends ConnectionUtil{
 	
-	Connection connection = null;
 	public StudentDAO() {
-		try {
-			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@artemis.vsnet.gmu.edu:1521/vse18c.vsnet.gmu.edu", "jshah21", "abeckoab");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super();
 	}
-
 	public int registerStudent(StudentBean student) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO StudentForm"
 				+ "  (studentId,  username, streetAddress, city, state, zipCode, phoneNo, email, url, hsGradMonth, hsGradYear, likedMost, interested, comments, recommend) VALUES "
@@ -38,12 +30,10 @@ public class StudentDAO {
 
 		int result = 0;
 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-
 		try (
 
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
 			preparedStatement.setString(1, student.getStudentId());
 			preparedStatement.setString(2, student.getUsername());
 			preparedStatement.setString(3, student.getStreetAddress());
@@ -130,7 +120,7 @@ public class StudentDAO {
 				"317-992-7764", "jinal17@gmail.com", "www.sivyati.com", "February", "2020", "Students", "Internet",
 				"Comments are Comments", "likely");
 		StudentDAO obj = new StudentDAO();
-//    	obj.registerStudent(student);
+    	obj.registerStudent(student);
 
 		System.out.println("Display student records");
 		List<String> res = obj.retrieve();

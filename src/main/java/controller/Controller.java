@@ -35,6 +35,13 @@ public class Controller extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	static{
+	    try {
+	        Class.forName ("oracle.jdbc.OracleDriver");
+	    } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	    }
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -47,15 +54,14 @@ public class Controller extends HttpServlet {
         StudentDAO studentDAO = new StudentDAO();
         StudentBean studentBean = studentDAO.retrieveRecord(studentID[0]);
         HttpSession session = request.getSession();
-//        session.setAttribute("studentRecord", studentBean);
+        session.setAttribute("studentRecord", studentBean);
         request.setAttribute("studentRecord", studentBean);
         String address;
         if (studentBean != null) { //If student details found
-                address = "/WEB-INF/Student.jsp"; // TODO
+             address = "/WEB-INF/Student.jsp"; // TODO
         } else {
-                address = "/WEB-INF/NoSuchStudent.jsp"; // TODO
+             address = "/WEB-INF/NoSuchStudent.jsp"; // TODO
         }
-
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
 	}
@@ -111,7 +117,6 @@ public class Controller extends HttpServlet {
 			if (max < int_arr[i]) {
 				max = int_arr[i];
 			}
-//        	sum += int_arr[i];
 		}
 		float sum = 0.0f;
 		for (int i = 0; i < int_arr.length; i++)
@@ -124,55 +129,19 @@ public class Controller extends HttpServlet {
 		System.out.println("name: " + name);
 		System.out.println("address : " + address);
 
-		StudentDAO obj = new StudentDAO();
 		DataProcessor processor = new DataProcessor(numbers);
 		DataBean dataBean = processor.calculate();
 		List<String> studentIds = new ArrayList<>();
 		try {
+			StudentDAO obj = new StudentDAO();
 			obj.registerStudent(student);
 			studentIds = obj.retrieve();
 		} catch (Exception e) {
 			System.out.println("data base error " + e.getMessage());
 		}
-		 
-//		Test case to hit the no student found jsp
-        // studentIds = null; 
-		if(studentIds == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/NoSuchStudentJSP.jsp");
-			dispatcher.forward(request, response);
-		}
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>");
-		out.println("<p><b>Student ID : </b>" + studID + "</p>");
-		out.println("<p><b>Name : </b>" + name + "</p>");
-		out.println("<p><b>Address : </b>" + address + "</p>");
-		out.println("<p><b>city : </b>" + city + "</p>");
-		out.println("<p><b>state : </b>" + state + "</p>");
-		out.println("<p><b>zip : </b>" + zip + "</p>");
-		out.println("<p><b>Phone : </b>" + telephone + "</p>");
-		out.println("<p><b>email : </b>" + email + "</p>");
-		out.println("<p><b>URL : </b>" + url + "</p>");
-		out.println("<p><b>date: </b>" + date + "</p>");
-		out.println("<p><b>Graduation date: </b>" + g_month + " - " + g_year + "</p>");
-		out.println("<p><b>Things Liked are : </b>" + liked + "</p>");
-		out.println("<p><b>interests : </b>" + interested + "</p>");
-		out.println("<p><b>comments : </b>" + comments + "</p>");
-		out.println("<p><b>recommentdation : </b>" + recommend + "</p>");
-		out.println("<p><b>data : </b>" + numbers + "</p>");
-		out.println("<p><b>Max : </b>" + max + "</p>");
-		out.println("<p><b>Average : </b>" + sum + "</p>");
-		out.println("<p><b>Mean : </b>" + dataBean.getMean() + "</p>");
-		out.println("<p><b>Standard Deviation : </b>" + dataBean.getStdDev() + "</p>");
-		out.println("</body></html>");
-
-//		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.println("<html><body>");
-//		out.println("<h3>Hello World</h3>");
-//		out.println("</body></html>");
 		
+		HttpSession session = request.getSession();
+        session.setAttribute("dataBean", dataBean);
 		request.setAttribute("dataBean", dataBean);
 		request.setAttribute("studentIds", studentIds);
 		
