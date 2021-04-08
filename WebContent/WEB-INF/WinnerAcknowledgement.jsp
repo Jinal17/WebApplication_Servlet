@@ -15,7 +15,7 @@
             }
         </script>
 </head>
-<body>
+<body class="back">
 	<div class="w3-top w3-margin-bottom">
   <div class="w3-container w3-gmu w3-center w3-margin-bottom">
     <a class="w3-bar-item w3-gmu w3-hover-gmu w3-disbutton" >Congratulations!</a>
