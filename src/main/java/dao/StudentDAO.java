@@ -23,15 +23,12 @@ public class StudentDAO extends ConnectionUtil{
 	public StudentDAO() {
 		super();
 	}
-	public int registerStudent(StudentBean student) throws ClassNotFoundException {
+	public List<String> registerStudent(StudentBean student) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO StudentForm"
 				+ "  (studentId,  username, streetAddress, city, state, zipCode, phoneNo, email, url, hsGradMonth, hsGradYear, likedMost, interested, comments, recommend) VALUES "
 				+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		int result = 0;
-
+		List<String> studentIds = new ArrayList<>();
 		try (
-
 			// Step 2:Create a statement using connection object
 			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
 			preparedStatement.setString(1, student.getStudentId());
@@ -52,13 +49,13 @@ public class StudentDAO extends ConnectionUtil{
 
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
-			result = preparedStatement.executeUpdate();
-
+			preparedStatement.executeUpdate();
+			studentIds = retrieve();
 		} catch (SQLException e) {
 			// process sql exception
 			e.printStackTrace();
 		}
-		return result;
+		return studentIds;
 	}
 
 	private void printSQLException(SQLException ex) {
@@ -77,7 +74,7 @@ public class StudentDAO extends ConnectionUtil{
 		}
 	}
 	
-	public List<String> retrieve() {
+	private List<String> retrieve() {
 
 		List<String> result = new ArrayList<>();
 		try {

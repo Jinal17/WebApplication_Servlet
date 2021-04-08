@@ -18,6 +18,7 @@ import main.java.bean.DataBean;
 import main.java.bean.DataProcessor;
 import main.java.bean.StudentBean;
 import main.java.dao.StudentDAO;
+import main.java.util.DataRetriever;
 
 
 /**
@@ -48,11 +49,10 @@ public class Controller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.print("enter get method");
 		String[] studentID = request.getParameterValues("param");
-        StudentDAO studentDAO = new StudentDAO();
-        StudentBean studentBean = studentDAO.retrieveRecord(studentID[0]);
+        DataRetriever dataRetriever = new DataRetriever();
+        StudentBean studentBean = dataRetriever.getStudentRecord(studentID);
         HttpSession session = request.getSession();
         session.setAttribute("studentRecord", studentBean);
         request.setAttribute("studentRecord", studentBean);
@@ -72,72 +72,18 @@ public class Controller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
 
-		String studID = request.getParameter("studID");
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String city = request.getParameter("city");
-		String state = request.getParameter("state");
-		String zip = request.getParameter("zip");
-		String telephone = request.getParameter("telephone");
-		String email = request.getParameter("email");
-		String url = request.getParameter("url");
-		String date = request.getParameter("date");
-		String g_month = request.getParameter("graduation");
-		String g_year = request.getParameter("gdate");
-		String[] thingsLiked = request.getParameterValues("thingsLiked");
-		String liked = "";
-
-		if (thingsLiked != null) {
-			System.out.println("things liked are: ");
-			for (String k : thingsLiked) {
-				liked += k + ",";
-				System.out.println("\t" + k);
-			}
-		}
-		String interested = request.getParameter("interested");
-		String comments = request.getParameter("comments");
-		String recommend = request.getParameter("recommend");
+		DataRetriever dataRetriever = new DataRetriever();
+		StudentBean student = dataRetriever.createStudentBean(request);
 		String numbers = request.getParameter("numbers");
-		String[] items = numbers.split(",");
-
-		StudentBean student = new StudentBean(studID, name, address, city, state, zip, telephone, email, url,
-				// date
-				g_month, g_year, liked, interested, comments, recommend);
-
-		int[] int_arr = new int[items.length];
-		for (int i = 0; i < items.length; i++) {
-			int_arr[i] = Integer.parseInt(items[i]);
-		}
-
-		int max = 1;
-		for (int i = 0; i < int_arr.length; i++) {
-			if (max < int_arr[i]) {
-				max = int_arr[i];
-			}
-		}
-		float sum = 0.0f;
-		for (int i = 0; i < int_arr.length; i++)
-			sum += int_arr[i];
-		sum = sum / int_arr.length;
-//        
-		System.out.println(Arrays.toString(int_arr));
-		System.out.println("Max of the array  = " + max);
-
-		System.out.println("name: " + name);
-		System.out.println("address : " + address);
-
-		DataProcessor processor = new DataProcessor(numbers);
-		DataBean dataBean = processor.calculate();
+		
+		DataBean dataBean = dataRetriever.createDataBean(numbers);
 		List<String> studentIds = new ArrayList<>();
 		try {
 			StudentDAO obj = new StudentDAO();
-			obj.registerStudent(student);
-			studentIds = obj.retrieve();
+			studentIds = obj.registerStudent(student); // register student and retrieve all registered student Ids
 		} catch (Exception e) {
-			System.out.println("data base error " + e.getMessage());
+			System.out.println("data base error" + e.getMessage());
 		}
 		
 		HttpSession session = request.getSession();
