@@ -1,23 +1,24 @@
-/**
- * 
- */
 package main.java.util;
 
 import main.java.bean.StudentBean;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
+ * Parses every input elements from the student survey form and sets it to the StudentBean
  * @author jinalshah
  *
  */
 public class RequestParser {
 
-	/**
-	 * 
-	 */
+	// Default Constructor
 	public RequestParser() {
-		// TODO Auto-generated constructor stub
+		
 	}
+	/**
+	 * Parse request and creates studentbean
+	 * @param request
+	 * @return
+	 */
 	public StudentBean parseRequest(HttpServletRequest request) {
 		String studID = request.getParameter("studID");
 		String name = request.getParameter("name");

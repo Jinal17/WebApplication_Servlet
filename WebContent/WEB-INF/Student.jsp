@@ -1,4 +1,7 @@
-<!-- StudentJSP using RequestDispatcher object to display the student data to the user. The structure of the StudentJSP page for the retrieved data could be similar to the Survey Form in a read only format.  -->
+<!-- StudentJSP using RequestDispatcher object to display the student data to the user. 
+The structure of the StudentJSP page for the retrieved data could be similar to the 
+Survey Form in a read only format.  -->
+
 <%@page import="main.java.bean.StudentBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

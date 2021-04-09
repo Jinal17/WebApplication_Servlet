@@ -1,3 +1,6 @@
+<%-- Simple Acknowledgement JSP : This form Thanks user for filling out the form and 
+	prints mean and standard deviation. With the use of Databean &   --%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     

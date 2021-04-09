@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.java.dao;
 
 import java.sql.Connection;
@@ -16,13 +13,21 @@ import main.java.bean.StudentBean;
 
 /**
  * @author jinalshah
- *
+ * Data Access Object establishes connection with the Oracle Database. 
+ * It retrieves and sets data in and from the Database based on the JSP/HTML user inputs.
  */
 public class StudentDAO extends ConnectionUtil{
 	
+	// calls constructor of the connectionUtil abstract class
 	public StudentDAO() {
 		super();
 	}
+	/**
+	 * Registers student into Oracle DB and retrieves all valid studentIds
+	 * @param student
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	public List<String> registerStudent(StudentBean student) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO StudentForm"
 				+ "  (studentId,  username, streetAddress, city, state, zipCode, phoneNo, email, url, hsGradMonth, hsGradYear, likedMost, interested, comments, recommend) VALUES "
@@ -57,7 +62,10 @@ public class StudentDAO extends ConnectionUtil{
 		}
 		return studentIds;
 	}
-
+	/**
+	 * Handle SQL Exception
+	 * @param ex
+	 */
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
@@ -73,13 +81,16 @@ public class StudentDAO extends ConnectionUtil{
 			}
 		}
 	}
-	
+	/**
+	 * Retrieve all studentIds from StudentForm table
+	 * @return
+	 */
 	private List<String> retrieve() {
 
 		List<String> result = new ArrayList<>();
 		try {
 			Statement selectStmt = connection.createStatement();
-			ResultSet rs = selectStmt.executeQuery("select * from StudentForm");
+			ResultSet rs = selectStmt.executeQuery("select studentId from StudentForm");
 
 			while (rs.next()) {
 				result.add(rs.getString(1));
@@ -89,7 +100,11 @@ public class StudentDAO extends ConnectionUtil{
 		}
 		return result;
 	}
-
+	/**
+	 * Retrieve record based on studentId
+	 * @param studentId
+	 * @return
+	 */
 	public StudentBean retrieveRecord(String studentId) {
 
 		StudentBean result = null;
@@ -111,13 +126,17 @@ public class StudentDAO extends ConnectionUtil{
 		}
 		return result;
 	}
-
+	/**
+	 * For testing locally as stand-alone application
+	 * @param arg
+	 * @throws Exception
+	 */
 	public static void main(String[] arg) throws Exception {
 		StudentBean student = new StudentBean("12345", "jinal", "42287 impervious ter", "ashburn", "va", "20148",
 				"317-992-7764", "jinal17@gmail.com", "www.sivyati.com", "February", "2020", "Students", "Internet",
 				"Comments are Comments", "likely");
 		StudentDAO obj = new StudentDAO();
-    	obj.registerStudent(student);
+//    	obj.registerStudent(student);
 
 		System.out.println("Display student records");
 		List<String> res = obj.retrieve();

@@ -1,3 +1,6 @@
+<%-- Winner Acknowledgement JSP : This form declares the winner if the mean is greater then 90
+ 	& prints mean and standard deviation. With the use of Databean & StudentBean to retrieve records --%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

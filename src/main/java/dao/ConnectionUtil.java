@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.java.dao;
 
 import java.sql.Connection;
@@ -9,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * @author jinalshah
- *
+ * ConnectionUtil : Its an abstract class created to hold Oracle database connection details.
  */
 abstract class ConnectionUtil {
 

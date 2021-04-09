@@ -22,7 +22,7 @@ import main.java.util.DataRetriever;
 
 
 /**
- * Servlet implementation class Controller
+ * Servlet Controller : Handles doGet and doPost requests raised by the html & JSP pages. 
  */
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
@@ -33,9 +33,9 @@ public class Controller extends HttpServlet {
 	 */
 	public Controller() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	// This resolves the no driver found exception
 	static{
 	    try {
 	        Class.forName ("oracle.jdbc.OracleDriver");
@@ -100,8 +100,7 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/WinnerAcknowledgement.jsp");
 			dispatcher.forward(request, response);
 		}
-		
-		
+				
 		
 	}
 
