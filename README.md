@@ -1,5 +1,6 @@
 #SWE642 Homework 3#
 
+####Group: Jinal Shah, Justin Carlitti, Lohith Reddy, Manaff Khan
 
 ####Project Description####
 
