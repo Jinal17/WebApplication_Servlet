@@ -52,18 +52,23 @@ public class Controller extends HttpServlet {
 		System.out.print("enter get method");
 		String[] studentID = request.getParameterValues("param");
         DataRetriever dataRetriever = new DataRetriever();
-        StudentBean studentBean = dataRetriever.getStudentRecord(studentID);
-        HttpSession session = request.getSession();
-        session.setAttribute("studentRecord", studentBean);
-        request.setAttribute("studentRecord", studentBean);
-        String address;
-        if (studentBean != null) { //If student details found
-             address = "/WEB-INF/Student.jsp"; // TODO
-        } else {
-             address = "/WEB-INF/NoSuchStudent.jsp"; // TODO
+        try {
+        	StudentBean studentBean = dataRetriever.getStudentRecord(studentID);
+            HttpSession session = request.getSession();
+            session.setAttribute("studentRecord", studentBean);
+            request.setAttribute("studentRecord", studentBean);
+            String address;
+            if (studentBean != null) { //If student details found
+                 address = "/WEB-INF/Student.jsp"; // TODO
+            } else {
+                 address = "/WEB-INF/NoSuchStudent.jsp"; // TODO
+            }
+            RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+        	e.printStackTrace();
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-        dispatcher.forward(request, response);
+        
 	}
 
 	/**

@@ -4,6 +4,9 @@ import main.java.bean.DataBean;
 import main.java.bean.DataProcessor;
 import main.java.bean.StudentBean;
 import main.java.dao.StudentDAO;
+
+import java.sql.SQLException;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -25,7 +28,7 @@ public class DataRetriever {
 	 * @param studentID
 	 * @return
 	 */
-	public StudentBean getStudentRecord(String[] studentID) {
+	public StudentBean getStudentRecord(String[] studentID) throws SQLException {
 		StudentDAO studentDAO = new StudentDAO();
         StudentBean studentBean = studentDAO.retrieveRecord(studentID[0]);
         return studentBean;

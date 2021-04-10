@@ -27,8 +27,9 @@ public class StudentDAO extends ConnectionUtil{
 	 * @param student
 	 * @return
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public List<String> registerStudent(StudentBean student) throws ClassNotFoundException {
+	public List<String> registerStudent(StudentBean student) throws ClassNotFoundException, SQLException {
 		String INSERT_USERS_SQL = "INSERT INTO StudentForm"
 				+ "  (studentId,  username, streetAddress, city, state, zipCode, phoneNo, email, url, hsGradMonth, hsGradYear, likedMost, interested, comments, recommend) VALUES "
 				+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -59,6 +60,8 @@ public class StudentDAO extends ConnectionUtil{
 		} catch (SQLException e) {
 			// process sql exception
 			e.printStackTrace();
+		} finally {
+			connection.close();
 		}
 		return studentIds;
 	}
@@ -84,8 +87,9 @@ public class StudentDAO extends ConnectionUtil{
 	/**
 	 * Retrieve all studentIds from StudentForm table
 	 * @return
+	 * @throws SQLException 
 	 */
-	private List<String> retrieve() {
+	private List<String> retrieve() throws SQLException {
 
 		List<String> result = new ArrayList<>();
 		try {
@@ -97,6 +101,8 @@ public class StudentDAO extends ConnectionUtil{
 			}
 		} catch (SQLException e) { // process sql exception
 			e.printStackTrace();
+		} finally {
+			connection.close();
 		}
 		return result;
 	}
@@ -104,8 +110,9 @@ public class StudentDAO extends ConnectionUtil{
 	 * Retrieve record based on studentId
 	 * @param studentId
 	 * @return
+	 * @throws SQLException 
 	 */
-	public StudentBean retrieveRecord(String studentId) {
+	public StudentBean retrieveRecord(String studentId) throws SQLException {
 
 		StudentBean result = null;
 		try {
@@ -123,6 +130,8 @@ public class StudentDAO extends ConnectionUtil{
 			}
 		} catch (SQLException e) { // process sql exception
 			e.printStackTrace();
+		} finally {
+			connection.close();
 		}
 		return result;
 	}
