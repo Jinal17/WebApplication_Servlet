@@ -1,10 +1,10 @@
-#SWE642 Homework 3#
+Web Application Using Servlet, JSP, JDBC & Oracle Database
 
-####Group: Jinal Shah, Justin Carlitti, Lohith Reddy, Manaff Khan
+
 
 ####Project Description####
 
-This assignment focuses on server-side processing of the Student Survey Form data via MVC
+This project focuses on server-side processing of the Student Survey Form data via MVC
 implementation using a RequestDispatcher object. The implementation requires you to
 implement one Servlet that acts as a front controller that receives all client requests, saves the
 form data to a database table, performs business logic(s) via business delegate classes, stores
