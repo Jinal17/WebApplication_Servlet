@@ -14,7 +14,7 @@ Java class(es) which could be called from within the servlet to perform specific
 presentation logic is moved to JSP pages. 
 
 ####GitHub Repo####
-[https://github.com/Jinal17/swe642_hw3](https://github.com/Jinal17/swe642_hw3)
+[https://github.com/Jinal17/swe642_hw3](https://github.com/Jinal17/WebApplication_Servlet)
 
 ####Software and jar files Required
 
